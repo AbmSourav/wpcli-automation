@@ -4,7 +4,7 @@ WordPress installation with WP-CLI automation utility tool. It works on the top 
 It's a Bash script, so I guess it'll only work on Linux and MacOS. 
 You must have wpcli installed in your machine. WP-CLI intallation guidline: [Click Here](https://wp-cli.org/)
 
-![wpi demo](https://github.com/AbmSourav/wpcli-automation/blob/dev/doc/wpi-demo.gif)
+![wpi demo](https://github.com/AbmSourav/wpcli-automation/blob/dev/doc/wpi-automation-demo.gif)
 
 ## Documentation:
 * Download the latest release. 
