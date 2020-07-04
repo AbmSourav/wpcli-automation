@@ -8,6 +8,6 @@ You must have wpcli installed in your machine. WP-CLI intallation guidline: [Cli
 
 ## Documentation:
 * Download the latest release. 
-* Put **wps** file in your path or put it in your `/bin` directory.
-* Make it executable. `chmod +x wps` (you may need to run with `sudo`)
-* Then go to the folder where you want to install WordPress and run `wps`
+* Put **wpi** file in your path or put it in your `/bin` directory.
+* Make it executable. `chmod +x wpi` (you may need to run with `sudo`)
+* Then go to the folder where you want to install WordPress and run `wpi`
