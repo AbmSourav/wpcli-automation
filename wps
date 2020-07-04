@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# download WordPress core files
+wp core download
+
+# check required input is not given
+isempty() {
+	if [ ! $1 ]; then
+		echo "**** It is required. ****"
+		exit
+	fi
+}
+
+# takes inputs for config file
+wp_config_prompt() {
+	echo 
+	read -p "Database Name: " DB_NAME
+	isempty $DB_NAME
+
+	read -p "MySql User Name: " DB_USER_NAME
+	isempty $DB_USER_NAME
+
+	read -sp "MySql User Password: " DB_PASS
+	isempty $DB_PASS
+	echo 
+
+	HOST_NAME='localhost'
+	read -e -i $HOST_NAME -p "Host Name: " HOSTNAME
+	isempty $HOSTNAME
+
+	TPREFIX=wp_
+	read -e -i $TPREFIX -p "Table Prefix: " TABLE_PREFIX
+	isempty $TABLE_PREFIX
+}
+
+# take inputs for installation
+wp_install_prompt() {
+	if [ $HOSTNAME == "localhost" ]; then
+		URL="$HOSTNAME/foldername"
+	else
+		URL="SiteURL"
+	fi
+	read -e -i $URL -p "URL: " SITE_URL
+	isempty $SITE_URL
+
+	read -p "Site Title: " TITLE
+	isempty $TITLE
+
+	ADMIN_USER="admin"
+	read -e -i $ADMIN_USER -p "Admin User Name: " USER
+	isempty $USER
+
+	read -sp "Admin Password: " ADMIN_PASSWORD
+	isempty $ADMIN_PASSWORD
+	echo 
+
+	read -p "Admin Email: " ADMIN_EMAIL
+	isempty $ADMIN_EMAIL
+}
+
+# create wp-config.php file
+core_config() {
+	wp config create --dbname=$DB_NAME --dbuser=$DB_USER_NAME --dbpass=$DB_PASS --dbhost=$HOSTNAME --dbprefix=$TABLE_PREFIX
+}
+
+# create database and install
+core_install() {
+	wp db create
+	wp core install --url=$SITE_URL --title=$TITLE --admin_user=$USER --admin_password=$ADMIN_PASSWORD --admin_email=$ADMIN_EMAIL
+}
+
+# exicute wp_config_prompt, core_config and core_install
+install() {
+	wp_config_prompt
+	wp_install_prompt
+	core_config
+	core_install
+}
+
+install
